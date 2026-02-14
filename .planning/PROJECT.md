@@ -1,0 +1,48 @@
+# ML-Project-2
+
+## What This Is
+
+Classification pipeline for the Covertype dataset from OpenML. Predicts forest cover type (7 classes) from cartographic features.
+
+## Core Value
+
+Production-ready multi-class classification pipeline with hyperparameter optimization and comprehensive metrics.
+
+## Dataset
+
+- **Source**: OpenML (Covertype / dataset_159_covertype)
+- **Samples**: ~581K
+- **Features**: 54 (elevation, slope, aspect, wilderness areas, soil types)
+- **Classes**: 7 (forest cover types)
+
+## Key Decisions
+
+| Decision | Rationale | Outcome |
+|----------|-----------|---------|
+| Multi-class classification | Covertype has 7 classes | — |
+| Precision/Recall/F1 | Toy datasets use accuracy; production needs per-class metrics | — |
+| GridSearchCV | Consistent with ML-Project-1 | — |
+| Classifier models | Different from ML-Project-1 regression | — |
+
+## Requirements
+
+### Active
+
+- [ ] Load Covertype from OpenML
+- [ ] Train/val/test split
+- [ ] Preprocessing pipeline
+- [ ] RandomForest classifier
+- [ ] XGBoost classifier (if available)
+- [ ] GradientBoosting classifier
+- [ ] GridSearchCV hyperparameter tuning
+- [ ] Evaluation: precision, recall, F1 (macro/weighted)
+- [ ] CLI with args: --dataset, --target_col, --val_size, --test_size, --random_state, --optimize
+
+### Out of Scope
+
+- Neural networks — save for exploration phase
+- Deployment/API — future milestone
+- Experiment logging (JSON) — future milestone
+
+---
+*Last updated: 2026-02-14 after initialization*

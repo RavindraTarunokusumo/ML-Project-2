@@ -2,9 +2,13 @@
 
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from sklearn.pipeline import Pipeline
+from sklearn.svm import SVC
 import xgboost as xgb
 from typing import Any
 
+
+# Models that don't need scaling (tree-based)
+NO_SCALE_MODELS = {'rf', 'randomforest', 'gb', 'gradientboosting', 'xgb', 'xgboost'}
 
 # Model aliases
 MODEL_ALIASES = {
@@ -14,6 +18,8 @@ MODEL_ALIASES = {
     'gradientboosting': GradientBoostingClassifier,
     'xgb': xgb.XGBClassifier,
     'xgboost': xgb.XGBClassifier,
+    'svm': SVC,
+    'svc': SVC,
 }
 
 
@@ -41,8 +47,8 @@ def build_model_pipeline(
 
     model_cls = MODEL_ALIASES[model_name_lower]
 
-    # Tree models don't need scaling
-    use_scaler = model_name_lower in ['enet', 'elasticnet', 'lr', 'logisticregression']
+    # SVM needs scaling; tree models don't
+    use_scaler = model_name_lower not in NO_SCALE_MODELS
 
     # Build preprocessor
     preprocessor = build_preprocessor(X, use_scaler=use_scaler)
@@ -92,6 +98,12 @@ def get_default_param_grid(model_name: str) -> dict:
             'model__n_estimators': [100, 200],
             'model__max_depth': [3, 5],
             'model__learning_rate': [0.05, 0.1]
+        }
+    elif model_name_lower in ['svm', 'svc']:
+        return {
+            'model__C': [0.1, 1, 10],
+            'model__kernel': ['rbf', 'linear'],
+            'model__gamma': ['scale', 'auto']
         }
     else:
         return {}

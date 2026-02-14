@@ -54,8 +54,8 @@ def parse_args():
     parser.add_argument(
         "--models",
         nargs="+",
-        default=["rf", "xgb", "gb"],
-        help="Models to train (default: rf xgb gb)"
+        default=["rf", "xgb", "gb", "svm"],
+        help="Models to train (default: rf xgb gb svm)"
     )
     return parser.parse_args()
 

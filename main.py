@@ -1,17 +1,37 @@
 """Main entry point for ML-Project-2 classification pipeline."""
 
 import argparse
-import sys
 
 from src.data import DataLoader
-from src.preprocessing import SplitConfig, split_data
+from src.eval import print_evaluation, run_grid_search, validate_model
 from src.model import build_model_pipeline, get_default_param_grid
-from src.eval import validate_model, print_evaluation, run_grid_search
-
+from src.preprocessing import SplitConfig, split_data
 
 # Default target column for Covertype
 DEFAULT_TARGET = "Cover_Type"
 
+
+PARAM_GRID = {
+    'rf': {
+        'model__n_estimators': [100, 200],
+        'model__max_depth': [10, 20, None],
+        'model__min_samples_split': [2, 5],
+    },
+    'xgb': {
+        'model__n_estimators': [100, 200],
+        'model__max_depth': [3, 6],
+        'model__learning_rate': [0.01, 0.1],
+    },
+    'gb': {
+        'model__n_estimators': [100, 200],
+        'model__max_depth': [3, 6],
+        'model__learning_rate': [0.01, 0.1],
+    },
+    'svm': {
+        'model__C': [0.1, 1, 10],
+        'model__kernel': ['linear', 'rbf'],
+    }
+}
 
 
 def main(args):
@@ -61,7 +81,10 @@ def main(args):
 
         if args.optimize:
             # Run grid search on training set
-            param_grid = get_default_param_grid(model_name)
+            if PARAM_GRID.get(model_name.lower()):
+                param_grid = PARAM_GRID[model_name.lower()]
+            else:
+                param_grid = get_default_param_grid(model_name)
             print(f"Running GridSearchCV with param grid: {param_grid}")
             grid_search = run_grid_search(
                 pipeline, X_train, y_train, param_grid, cv=3

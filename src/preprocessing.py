@@ -1,13 +1,14 @@
 """Preprocessing utilities."""
 
 from dataclasses import dataclass
-import pandas as pd
+
 import numpy as np
-from sklearn.model_selection import train_test_split
+import pandas as pd
 from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
+from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 
 @dataclass

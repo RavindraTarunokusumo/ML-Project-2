@@ -1,8 +1,9 @@
 """Data loading utilities."""
 
-import pandas as pd
-import openml
 from pathlib import Path
+
+import openml
+import pandas as pd
 
 
 class DataLoader:

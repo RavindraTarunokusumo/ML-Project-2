@@ -1,16 +1,15 @@
 """Evaluation utilities."""
 
 import numpy as np
-import pandas as pd
-from sklearn.model_selection import cross_val_score, GridSearchCV
 from sklearn.metrics import (
     accuracy_score,
+    classification_report,
+    confusion_matrix,
+    f1_score,
     precision_score,
     recall_score,
-    f1_score,
-    classification_report,
-    confusion_matrix
 )
+from sklearn.model_selection import GridSearchCV, cross_val_score
 
 
 def validate_model(
@@ -71,11 +70,11 @@ def print_evaluation(metrics: dict, y_true: np.ndarray, y_pred: np.ndarray) -> N
     print("EVALUATION RESULTS")
     print(f"{'='*50}")
 
-    print(f"\nCross-Validation (5-fold, F1 weighted):")
+    print("\nCross-Validation (5-fold, F1 weighted):")
     print(f"  Mean: {metrics['cv_f1_mean']:.4f}")
     print(f"  Std:  {metrics['cv_f1_std']:.4f}")
 
-    print(f"\nValidation Set:")
+    print("\nValidation Set:")
     print(f"  Accuracy:           {metrics['accuracy']:.4f}")
     print(f"  Precision (macro):  {metrics['precision_macro']:.4f}")
     print(f"  Recall (macro):     {metrics['recall_macro']:.4f}")
@@ -84,10 +83,10 @@ def print_evaluation(metrics: dict, y_true: np.ndarray, y_pred: np.ndarray) -> N
     print(f"  Recall (weighted):   {metrics['recall_weighted']:.4f}")
     print(f"  F1 (weighted):       {metrics['f1_weighted']:.4f}")
 
-    print(f"\nClassification Report:")
+    print("\nClassification Report:")
     print(classification_report(y_true, y_pred, zero_division=0))
 
-    print(f"Confusion Matrix:")
+    print("Confusion Matrix:")
     print(confusion_matrix(y_true, y_pred))
 
 

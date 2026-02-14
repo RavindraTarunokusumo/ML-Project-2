@@ -1,11 +1,11 @@
 """Model building utilities."""
 
-from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
-from sklearn.pipeline import Pipeline
-from sklearn.svm import SVC
-import xgboost as xgb
 from typing import Any
 
+import xgboost as xgb
+from sklearn.ensemble import GradientBoostingClassifier, RandomForestClassifier
+from sklearn.pipeline import Pipeline
+from sklearn.svm import SVC
 
 # Models that don't need scaling (tree-based)
 NO_SCALE_MODELS = {'rf', 'randomforest', 'gb', 'gradientboosting', 'xgb', 'xgboost'}
@@ -69,7 +69,7 @@ def build_model_pipeline(
 
 
 def get_default_param_grid(model_name: str) -> dict:
-    """Get default parameter grid for GridSearchCV.
+    """Fallback to use the default parameter grid for GridSearchCV.
 
     Args:
         model_name: Model name or alias

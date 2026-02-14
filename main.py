@@ -13,56 +13,9 @@ from src.eval import validate_model, print_evaluation, run_grid_search
 DEFAULT_TARGET = "Cover_Type"
 
 
-def parse_args():
-    """Parse command line arguments."""
-    parser = argparse.ArgumentParser(description="ML-Project-2: Classification Pipeline")
-    parser.add_argument(
-        "--dataset",
-        type=int,
-        default=159,
-        help="OpenML dataset ID (default: 159 = Covertype)"
-    )
-    parser.add_argument(
-        "--target_col",
-        type=str,
-        default=DEFAULT_TARGET,
-        help=f"Target column name (default: {DEFAULT_TARGET})"
-    )
-    parser.add_argument(
-        "--val_size",
-        type=float,
-        default=0.15,
-        help="Validation set proportion (default: 0.15)"
-    )
-    parser.add_argument(
-        "--test_size",
-        type=float,
-        default=0.15,
-        help="Test set proportion (default: 0.15)"
-    )
-    parser.add_argument(
-        "--random_state",
-        type=int,
-        default=42,
-        help="Random state for reproducibility (default: 42)"
-    )
-    parser.add_argument(
-        "--optimize",
-        action="store_true",
-        help="Run GridSearchCV hyperparameter tuning"
-    )
-    parser.add_argument(
-        "--models",
-        nargs="+",
-        default=["rf", "xgb", "gb", "svm"],
-        help="Models to train (default: rf xgb gb svm)"
-    )
-    return parser.parse_args()
 
-
-def main():
+def main(args):
     """Run the classification pipeline."""
-    args = parse_args()
 
     print(f"\n{'='*60}")
     print("ML-Project-2: Classification Pipeline")
@@ -138,8 +91,50 @@ def main():
 
     print(f"\n{'='*60}")
     print("Pipeline complete!")
-    return 0
-
 
 if __name__ == "__main__":
-    sys.exit(main())
+    """Parse command line arguments."""
+    parser = argparse.ArgumentParser(description="ML-Project-2: Classification Pipeline")
+    parser.add_argument(
+        "--dataset",
+        type=int,
+        default=159,
+        help="OpenML dataset ID (default: 159 = Covertype)"
+    )
+    parser.add_argument(
+        "--target_col",
+        type=str,
+        default=DEFAULT_TARGET,
+        help=f"Target column name (default: {DEFAULT_TARGET})"
+    )
+    parser.add_argument(
+        "--val_size",
+        type=float,
+        default=0.15,
+        help="Validation set proportion (default: 0.15)"
+    )
+    parser.add_argument(
+        "--test_size",
+        type=float,
+        default=0.15,
+        help="Test set proportion (default: 0.15)"
+    )
+    parser.add_argument(
+        "--random_state",
+        type=int,
+        default=42,
+        help="Random state for reproducibility (default: 42)"
+    )
+    parser.add_argument(
+        "--optimize",
+        action="store_true",
+        help="Run GridSearchCV hyperparameter tuning"
+    )
+    parser.add_argument(
+        "--models",
+        nargs="+",
+        default=["rf", "xgb", "gb", "svm"],
+        help="Models to train (default: rf xgb gb svm)"
+    )
+    args = parser.parse_args()  
+    main(args)

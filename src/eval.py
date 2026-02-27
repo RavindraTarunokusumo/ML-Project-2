@@ -21,7 +21,7 @@ def validate_model(
     y_val: np.ndarray,
     cv: int = 5,
     scoring: str = 'f1_weighted'
-) -> dict:
+) -> tuple[dict, np.ndarray]:
     """Validate model with cross-validation and test set evaluation.
 
     Args:
@@ -34,7 +34,7 @@ def validate_model(
         scoring: Scoring metric for CV
 
     Returns:
-        Dictionary with evaluation metrics
+        (metrics dict, y_pred array)
     """
     # Cross-validation on training set
     cv_scores = cross_val_score(model, X_train, y_train, cv=cv, scoring=scoring)

@@ -97,7 +97,7 @@ def build_preprocessor(
         numeric_steps = [('imputer', SimpleImputer(strategy='median'))]
         if use_scaler:
             numeric_steps.append(('scaler', StandardScaler()))
-        transformers.append(('num', numeric_steps, numeric_cols))
+        transformers.append(('num', Pipeline(numeric_steps), numeric_cols))
 
     # Categorical: impute + one-hot
     if categorical_cols:

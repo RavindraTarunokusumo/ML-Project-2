@@ -28,16 +28,16 @@ Production-ready multi-class classification pipeline with hyperparameter optimiz
 
 ### Active
 
-- [ ] Load Covertype from OpenML
-- [ ] Train/val/test split
-- [ ] Preprocessing pipeline
-- [ ] RandomForest classifier
-- [ ] XGBoost classifier (if available)
-- [ ] GradientBoosting classifier
-- [ ] SVC classifier (if available)
-- [ ] GridSearchCV hyperparameter tuning
-- [ ] Evaluation: precision, recall, F1 (macro/weighted)
-- [ ] CLI with args: --dataset, --target_col, --val_size, --test_size, --random_state, --optimize
+- [x] Load Covertype from OpenML
+- [x] Train/val/test split
+- [x] Preprocessing pipeline
+- [x] RandomForest classifier
+- [x] XGBoost classifier (if available)
+- [x] GradientBoosting classifier
+- [x] SVM classifier
+- [x] GridSearchCV hyperparameter tuning
+- [x] Evaluation: precision, recall, F1 (macro/weighted)
+- [x] CLI with args: --dataset, --target_col, --val_size, --test_size, --random_state, --optimize
 
 ### Out of Scope
 
@@ -46,4 +46,4 @@ Production-ready multi-class classification pipeline with hyperparameter optimiz
 - Experiment logging (JSON) — future milestone
 
 ---
-*Last updated: 2026-02-14 after initialization*
+*Last updated: 2026-02-27 — all initial requirements complete*

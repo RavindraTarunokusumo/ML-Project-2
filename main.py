@@ -7,8 +7,8 @@ from src.eval import print_evaluation, run_grid_search, validate_model
 from src.model import build_model_pipeline, get_default_param_grid
 from src.preprocessing import SplitConfig, split_data
 
-# Default target column for Covertype
-DEFAULT_TARGET = "Cover_Type"
+# Default target column for Covertype v3
+DEFAULT_TARGET = "class"
 
 
 PARAM_GRID = {
@@ -45,6 +45,7 @@ def main(args):
     print(f"Splits: val={args.val_size}, test={args.test_size}")
     print(f"Random state: {args.random_state}")
     print(f"Optimize: {args.optimize}")
+    print(f"Resampling: {not args.no_resample}")
     print(f"Models: {args.models}")
 
     # Load data
@@ -77,7 +78,13 @@ def main(args):
         print(f"{'='*40}")
 
         # Build model
-        pipeline = build_model_pipeline(model_name, X_train)
+        pipeline = build_model_pipeline(
+            model_name,
+            X_train,
+            y_train,
+            resample_training=not args.no_resample,
+            random_state=args.random_state,
+        )
 
         if args.optimize:
             # Run grid search on training set
@@ -152,6 +159,11 @@ if __name__ == "__main__":
         "--optimize",
         action="store_true",
         help="Run GridSearchCV hyperparameter tuning"
+    )
+    parser.add_argument(
+        "--no_resample",
+        action="store_true",
+        help="Disable undersampling and SMOTE on the training folds"
     )
     parser.add_argument(
         "--models",

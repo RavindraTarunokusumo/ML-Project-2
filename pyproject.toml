@@ -8,6 +8,7 @@ dependencies = [
     "pandas",
     "numpy",
     "scikit-learn",
+    "imbalanced-learn",
     "openml",
     "xgboost",
 ]

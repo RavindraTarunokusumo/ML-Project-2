@@ -34,6 +34,7 @@ Production-ready multi-class classification pipeline with hyperparameter optimiz
 - [ ] RandomForest classifier
 - [ ] XGBoost classifier (if available)
 - [ ] GradientBoosting classifier
+- [ ] SVC classifier (if available)
 - [ ] GridSearchCV hyperparameter tuning
 - [ ] Evaluation: precision, recall, F1 (macro/weighted)
 - [ ] CLI with args: --dataset, --target_col, --val_size, --test_size, --random_state, --optimize
